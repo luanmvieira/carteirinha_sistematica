@@ -1,0 +1,48 @@
+name: carteirinha_sistematica
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_modular: ^5.0.3
+  mobx: ^2.1.3
+  flutter_mobx: ^2.0.6+5
+  slidy: ^4.0.3
+
+  #dependencias Firebase
+  firebase_core: ^1.16.0
+  firebase_auth: ^2.0.0
+  cloud_firestore: ^2.3.0
+  firebase_storage: ^10.2.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  mobx_codegen: ^2.1.1
+  modular_test:
+  build_runner: ^2.3.2
+
+
+flutter:
+  uses-material-design: true
+
+vars:
+  clean: flutter clean
+  get: flutter pub get
+  runner: flutter pub run build_runner
+  pubUpgrade: flutter pub upgrade
+  run: flutter run
+
+scripts:
+  mobx: $runner watch --delete-conflicting-outputs
+  mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
+  mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
+  web: flutter packages pub global run webdev serve
+  sdkVersion: $pubUpgrade & $get & $clean & $run
