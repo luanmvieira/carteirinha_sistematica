@@ -179,6 +179,7 @@ class _Auth_pageState extends State<Auth_page> {
                         onPressed: () async {
                           await controller.RealizarLogin();
                           if(controller.resultLogin==true){
+                            Modular.to.navigate("/home/");
                             toast.successToast(
                                 context,
                                 message: "Login efetuado",

@@ -1,4 +1,5 @@
 import 'package:carteirinha_sistematica/app/modules/auth/auth_store.dart';
+import 'package:carteirinha_sistematica/app/modules/home/home_module.dart';
 import 'package:carteirinha_sistematica/app/modules/home/home_store.dart';
 import 'package:carteirinha_sistematica/app/modules/registration/registration_module.dart';
 import 'package:carteirinha_sistematica/app/modules/registration/registration_store.dart';
@@ -17,6 +18,8 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ModuleRoute('/', module: AuthModule()),
     ModuleRoute('/registration', module: RegistrationModule()),
+    ModuleRoute('/home', module: HomeModule()),
+
 
   ];
 

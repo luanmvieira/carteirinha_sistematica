@@ -1,3 +1,6 @@
+import 'package:carteirinha_sistematica/app/models/user_model.dart';
+import 'package:carteirinha_sistematica/app/modules/home/repositories/db_home.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_store.g.dart';
@@ -5,10 +8,37 @@ part 'home_store.g.dart';
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
-  @observable
-  int counter = 0;
+  ConexaoFirebaseHome _dbHome = ConexaoFirebaseHome();
 
-  Future<void> increment() async {
-    counter = counter + 1;
+  @observable
+  bool logOutstate = false;
+  @observable
+  bool getValidator = false;
+  @observable
+  UserModel currentUserModel = UserModel();
+
+
+  @observable
+  String nameHomeController = '';
+  @observable
+  String photoHomeController = '';
+
+
+  @action
+  Future<void> getCurrentUser() async {
+    getValidator = true;
+    currentUserModel = await _dbHome.getCurrentUser();
+    nameHomeController = currentUserModel.nome;
+    photoHomeController = currentUserModel.foto;
+    getValidator = false;
+  }
+
+  @action
+  Future logOut() async {
+    logOutstate = await _dbHome.logout();
+    if(logOutstate == true){
+      Modular.to.navigate("/");
+    }else{
+    }
   }
 }
