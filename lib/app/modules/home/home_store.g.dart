@@ -57,6 +57,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$photoHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.photoHomeController', context: context);
+
+  @override
+  String get photoHomeController {
+    _$photoHomeControllerAtom.reportRead();
+    return super.photoHomeController;
+  }
+
+  @override
+  set photoHomeController(String value) {
+    _$photoHomeControllerAtom.reportWrite(value, super.photoHomeController, () {
+      super.photoHomeController = value;
+    });
+  }
+
   late final _$nameHomeControllerAtom =
       Atom(name: 'HomeStoreBase.nameHomeController', context: context);
 
@@ -73,19 +89,69 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  late final _$photoHomeControllerAtom =
-      Atom(name: 'HomeStoreBase.photoHomeController', context: context);
+  late final _$matriculaHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.matriculaHomeController', context: context);
 
   @override
-  String get photoHomeController {
-    _$photoHomeControllerAtom.reportRead();
-    return super.photoHomeController;
+  String get matriculaHomeController {
+    _$matriculaHomeControllerAtom.reportRead();
+    return super.matriculaHomeController;
   }
 
   @override
-  set photoHomeController(String value) {
-    _$photoHomeControllerAtom.reportWrite(value, super.photoHomeController, () {
-      super.photoHomeController = value;
+  set matriculaHomeController(String value) {
+    _$matriculaHomeControllerAtom
+        .reportWrite(value, super.matriculaHomeController, () {
+      super.matriculaHomeController = value;
+    });
+  }
+
+  late final _$dataHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.dataHomeController', context: context);
+
+  @override
+  String get dataHomeController {
+    _$dataHomeControllerAtom.reportRead();
+    return super.dataHomeController;
+  }
+
+  @override
+  set dataHomeController(String value) {
+    _$dataHomeControllerAtom.reportWrite(value, super.dataHomeController, () {
+      super.dataHomeController = value;
+    });
+  }
+
+  late final _$emailHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.emailHomeController', context: context);
+
+  @override
+  String get emailHomeController {
+    _$emailHomeControllerAtom.reportRead();
+    return super.emailHomeController;
+  }
+
+  @override
+  set emailHomeController(String value) {
+    _$emailHomeControllerAtom.reportWrite(value, super.emailHomeController, () {
+      super.emailHomeController = value;
+    });
+  }
+
+  late final _$telefoneHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.telefoneHomeController', context: context);
+
+  @override
+  String get telefoneHomeController {
+    _$telefoneHomeControllerAtom.reportRead();
+    return super.telefoneHomeController;
+  }
+
+  @override
+  set telefoneHomeController(String value) {
+    _$telefoneHomeControllerAtom
+        .reportWrite(value, super.telefoneHomeController, () {
+      super.telefoneHomeController = value;
     });
   }
 
@@ -111,8 +177,12 @@ mixin _$HomeStore on HomeStoreBase, Store {
 logOutstate: ${logOutstate},
 getValidator: ${getValidator},
 currentUserModel: ${currentUserModel},
+photoHomeController: ${photoHomeController},
 nameHomeController: ${nameHomeController},
-photoHomeController: ${photoHomeController}
+matriculaHomeController: ${matriculaHomeController},
+dataHomeController: ${dataHomeController},
+emailHomeController: ${emailHomeController},
+telefoneHomeController: ${telefoneHomeController}
     ''';
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_toast/m_toast.dart';
-import 'home_store.dart';
+import '../home_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -105,14 +105,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const CustomButtomHome(
                                   label: "Visualizar Carteirinha",
-                                  route: "/home/",
+                                  route: "/home/carteirinha",
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 const CustomButtomHome(
                                   label: "Ver dados",
-                                  route: "/home/",
+                                  route: "/home/profile",
                                 ),
                                 SizedBox(
                                   height: 10,

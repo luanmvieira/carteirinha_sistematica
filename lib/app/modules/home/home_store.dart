@@ -17,11 +17,18 @@ abstract class HomeStoreBase with Store {
   @observable
   UserModel currentUserModel = UserModel();
 
-
+  @observable
+  String photoHomeController = '';
   @observable
   String nameHomeController = '';
   @observable
-  String photoHomeController = '';
+  String matriculaHomeController = '';
+  @observable
+  String dataHomeController = '';
+  @observable
+  String emailHomeController = '';
+  @observable
+  String telefoneHomeController = '';
 
 
   @action
@@ -30,6 +37,10 @@ abstract class HomeStoreBase with Store {
     currentUserModel = await _dbHome.getCurrentUser();
     nameHomeController = currentUserModel.nome;
     photoHomeController = currentUserModel.foto;
+    matriculaHomeController = currentUserModel.matricula;
+    dataHomeController = currentUserModel.data;
+    emailHomeController = currentUserModel.email;
+    telefoneHomeController = currentUserModel.telefone;
     getValidator = false;
   }
 
