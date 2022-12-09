@@ -118,15 +118,8 @@ class _HomePageState extends State<HomePage> {
                                   height: 10,
                                 ),
                                 const CustomButtomHome(
-                                  label: "Pagamentos",
-                                  route: "/home/",
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                const CustomButtomHome(
-                                  label: "Beneficios",
-                                  route: "/home/",
+                                  label: "Planos",
+                                  route: "/home/planos",
                                 ),
                               ],
                             ),

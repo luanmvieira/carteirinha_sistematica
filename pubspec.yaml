@@ -36,6 +36,8 @@ dependencies:
   
   flutter_spinkit: ^5.1.0
 
+  carousel_slider: ^4.2.0
+
 
 
   google_fonts: ^3.0.1
@@ -55,6 +57,12 @@ flutter:
   assets:
     - lib/app/assets/escudo_atletica.png
     - lib/app/assets/profile_default.jpg
+    - lib/app/assets/profile_default.jpg
+    - lib/app/assets/Diretor1.jpg
+    - lib/app/assets/Diretor2.jpg
+    - lib/app/assets/Socio1.jpg
+    - lib/app/assets/Socio2.jpg
+    - lib/app/assets/Socio3.jpg
 
 vars:
   clean: flutter clean

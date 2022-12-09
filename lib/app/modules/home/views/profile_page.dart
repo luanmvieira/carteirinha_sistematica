@@ -115,6 +115,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               controller: _controller.telefoneHomeController,
                               icon: Icon(Icons.phone),
                           ),
+                          SizedBox(height: 15),
+                          Text(
+                              "Para sua segurança, dados como matricula, e-mail e telefone só poderão ser alterados enviando um e-mail para contatosistemaricos@gmail.com .",
+                          textAlign: TextAlign.justify,
+                          ),
 
                         ],
                       ),
