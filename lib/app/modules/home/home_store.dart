@@ -15,7 +15,11 @@ abstract class HomeStoreBase with Store {
   @observable
   bool getValidator = false;
   @observable
+  bool getValidatorUser = false;
+  @observable
   UserModel currentUserModel = UserModel();
+  @observable
+  List<UserModel> usuariosList = [];
 
   @observable
   String photoHomeController = '';
@@ -29,7 +33,17 @@ abstract class HomeStoreBase with Store {
   String emailHomeController = '';
   @observable
   String telefoneHomeController = '';
+  @observable
+  bool ativoHomeController = false;
+  @observable
+  bool adminHomeController = false;
 
+  @action
+  Future<void> getUsuarios() async {
+    getValidatorUser = true;
+    usuariosList = await _dbHome.getUserData();
+    getValidatorUser = false;
+  }
 
   @action
   Future<void> getCurrentUser() async {
@@ -41,6 +55,9 @@ abstract class HomeStoreBase with Store {
     dataHomeController = currentUserModel.data;
     emailHomeController = currentUserModel.email;
     telefoneHomeController = currentUserModel.telefone;
+    ativoHomeController = currentUserModel.ativo;
+    adminHomeController = currentUserModel.admin;
+
     getValidator = false;
   }
 

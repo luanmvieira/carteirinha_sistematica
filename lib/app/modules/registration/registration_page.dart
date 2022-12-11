@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_toast/m_toast.dart';
 
@@ -220,27 +221,50 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   _controller.dataController.text.isNotEmpty &&
                                   _controller.telefoneController.text.isNotEmpty){
                                 if(_controller.photoController.isEmpty){
-                                  toast.errorToast(context,
-                                      message: "Adicione a Foto",
-                                      alignment: Alignment.topCenter);
+                                  Fluttertoast.showToast(
+                                      msg: "Adicione a Foto",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 12.0
+                                  );
                                 }else{
                                   await _controller.CadastrarUser();
                                   if (_controller.resultUsuario == true) {
-                                    toast.successToast(
-                                        context,
-                                        message: "Cadastro efetuado com sucesso",
-                                        alignment: Alignment.topCenter);
+                                    Fluttertoast.showToast(
+                                        msg: "Cadastro efetuado com sucesso",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.green,
+                                        textColor: Colors.white,
+                                        fontSize: 12.0
+                                    );
                                     Modular.to.navigate('/');
                                   }else{
-                                    toast.errorToast(context,
-                                        message: "Erro ao realizar cadastro, verifique os dados e tente novamente!",
-                                        alignment: Alignment.topCenter);
+                                    Fluttertoast.showToast(
+                                        msg: "Erro ao realizar cadastro, verifique os dados e tente novamente!",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 12.0
+                                    );
                                   }
                                 }
                               }else{
-                                toast.errorToast(context,
-                                    message: "Complete todos os dados",
-                                    alignment: Alignment.topCenter);
+                                Fluttertoast.showToast(
+                                    msg: "Complete todos os dados",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 12.0
+                                );
                               }
                             })
                       ),

@@ -121,6 +121,14 @@ class _HomePageState extends State<HomePage> {
                                   label: "Planos",
                                   route: "/home/planos",
                                 ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                _controller.adminHomeController?
+                                const CustomButtomHome(
+                                  label: "Painel Administrativo",
+                                  route: "/home/gestor",
+                                ):Container()
                               ],
                             ),
                           ),

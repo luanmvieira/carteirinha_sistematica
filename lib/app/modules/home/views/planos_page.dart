@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carteirinha_sistematica/app/modules/home/home_store.dart';
-import 'package:carteirinha_sistematica/app/widgets/profile_default_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlanosPage extends StatefulWidget {
   const PlanosPage({Key? key}) : super(key: key);
@@ -123,8 +123,10 @@ class _PlanosPageState extends State<PlanosPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal),
                               ),
-                              onPressed: () async {
-
+                              onPressed: ()  async {
+                                await launchUrl(Uri.parse("https://mpago.la/2e2tG5o"),
+                                  mode: LaunchMode.externalApplication
+                                );
                               }),
                         ),
                         SizedBox(
@@ -198,8 +200,10 @@ class _PlanosPageState extends State<PlanosPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal),
                               ),
-                              onPressed: () async {
-
+                              onPressed: ()  async {
+                                await launchUrl(Uri.parse("https://mpago.la/1KG9kXi"),
+                                    mode: LaunchMode.externalApplication
+                                );
                               }),
                         ),
                         SizedBox(
@@ -270,8 +274,10 @@ class _PlanosPageState extends State<PlanosPage> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.normal),
                               ),
-                              onPressed: () async {
-
+                              onPressed: ()  async {
+                                await launchUrl(Uri.parse("https://mpago.la/1X7PuMx"),
+                                    mode: LaunchMode.externalApplication
+                                );
                               }),
                         ),
                         SizedBox(

@@ -9,6 +9,11 @@ class UserModel {
   String telefone;
   String password;
   String foto;
+  bool ativo;
+  bool admin;
+  String data_validade;
+  String tipo_socio;
+
 
 
   UserModel({
@@ -19,6 +24,11 @@ class UserModel {
     this.telefone = '',
     this.password = '',
     this.foto = '',
+    this.ativo = false,
+    this.admin = false,
+    this.data_validade = '',
+    this.tipo_socio = '',
+
 }
       );
 
@@ -30,6 +40,10 @@ class UserModel {
       "data"                    : this.data,
       "telefone"                : this.telefone,
       "foto"                    : this.foto,
+      "ativo"                   : this.ativo,
+      "admin"                   : this.admin,
+      "data_validade"           : this.data_validade,
+      "tipo_socio"              : this.tipo_socio,
     };
     return map;
 
@@ -43,6 +57,10 @@ class UserModel {
       data: doc['data'],
       telefone: doc['telefone'],
       foto: doc['foto'],
+      ativo: doc['ativo'],
+      admin: doc['admin'],
+      data_validade: doc['data_validade'],
+      tipo_socio: doc['tipo_socio'],
     );
   }
 }

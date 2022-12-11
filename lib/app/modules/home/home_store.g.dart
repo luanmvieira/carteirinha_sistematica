@@ -41,6 +41,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$getValidatorUserAtom =
+      Atom(name: 'HomeStoreBase.getValidatorUser', context: context);
+
+  @override
+  bool get getValidatorUser {
+    _$getValidatorUserAtom.reportRead();
+    return super.getValidatorUser;
+  }
+
+  @override
+  set getValidatorUser(bool value) {
+    _$getValidatorUserAtom.reportWrite(value, super.getValidatorUser, () {
+      super.getValidatorUser = value;
+    });
+  }
+
   late final _$currentUserModelAtom =
       Atom(name: 'HomeStoreBase.currentUserModel', context: context);
 
@@ -54,6 +70,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
   set currentUserModel(UserModel value) {
     _$currentUserModelAtom.reportWrite(value, super.currentUserModel, () {
       super.currentUserModel = value;
+    });
+  }
+
+  late final _$usuariosListAtom =
+      Atom(name: 'HomeStoreBase.usuariosList', context: context);
+
+  @override
+  List<UserModel> get usuariosList {
+    _$usuariosListAtom.reportRead();
+    return super.usuariosList;
+  }
+
+  @override
+  set usuariosList(List<UserModel> value) {
+    _$usuariosListAtom.reportWrite(value, super.usuariosList, () {
+      super.usuariosList = value;
     });
   }
 
@@ -155,6 +187,46 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  late final _$ativoHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.ativoHomeController', context: context);
+
+  @override
+  bool get ativoHomeController {
+    _$ativoHomeControllerAtom.reportRead();
+    return super.ativoHomeController;
+  }
+
+  @override
+  set ativoHomeController(bool value) {
+    _$ativoHomeControllerAtom.reportWrite(value, super.ativoHomeController, () {
+      super.ativoHomeController = value;
+    });
+  }
+
+  late final _$adminHomeControllerAtom =
+      Atom(name: 'HomeStoreBase.adminHomeController', context: context);
+
+  @override
+  bool get adminHomeController {
+    _$adminHomeControllerAtom.reportRead();
+    return super.adminHomeController;
+  }
+
+  @override
+  set adminHomeController(bool value) {
+    _$adminHomeControllerAtom.reportWrite(value, super.adminHomeController, () {
+      super.adminHomeController = value;
+    });
+  }
+
+  late final _$getUsuariosAsyncAction =
+      AsyncAction('HomeStoreBase.getUsuarios', context: context);
+
+  @override
+  Future<void> getUsuarios() {
+    return _$getUsuariosAsyncAction.run(() => super.getUsuarios());
+  }
+
   late final _$getCurrentUserAsyncAction =
       AsyncAction('HomeStoreBase.getCurrentUser', context: context);
 
@@ -176,13 +248,17 @@ mixin _$HomeStore on HomeStoreBase, Store {
     return '''
 logOutstate: ${logOutstate},
 getValidator: ${getValidator},
+getValidatorUser: ${getValidatorUser},
 currentUserModel: ${currentUserModel},
+usuariosList: ${usuariosList},
 photoHomeController: ${photoHomeController},
 nameHomeController: ${nameHomeController},
 matriculaHomeController: ${matriculaHomeController},
 dataHomeController: ${dataHomeController},
 emailHomeController: ${emailHomeController},
-telefoneHomeController: ${telefoneHomeController}
+telefoneHomeController: ${telefoneHomeController},
+ativoHomeController: ${ativoHomeController},
+adminHomeController: ${adminHomeController}
     ''';
   }
 }

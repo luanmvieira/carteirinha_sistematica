@@ -120,6 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               "Para sua segurança, dados como matricula, e-mail e telefone só poderão ser alterados enviando um e-mail para contatosistemaricos@gmail.com .",
                           textAlign: TextAlign.justify,
                           ),
+                          SizedBox(height: 15),
 
                         ],
                       ),

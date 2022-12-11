@@ -11,6 +11,7 @@ class ConexaoFirebaseHome{
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   UserModel _userm = UserModel();
   String emailCurrent = "";
+  List<UserModel> _userList = [];
 
   bool checkCurrentUser() {
     User? user = auth.currentUser;
@@ -33,6 +34,15 @@ class ConexaoFirebaseHome{
   Future logout() async {
     await auth.signOut();
     return true;
+  }
+  Future<List<UserModel>> getUserData() async {
+    _userList = [];
+    QuerySnapshot queryFuncionarios = await _db.collection("usuarios").get();
+    for (DocumentSnapshot _doc in queryFuncionarios.docs) {
+      UserModel _user = UserModel.fromMap(_doc);
+      _userList.add(_user);
+    }
+    return _userList;
   }
 
   // Future EditarUsuario(UserModel user) async {

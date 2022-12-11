@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_toast/m_toast.dart';
-import 'package:oktoast/oktoast.dart';
+
 
 class Auth_page extends StatefulWidget {
   const Auth_page({Key? key}) : super(key: key);
@@ -18,6 +19,11 @@ class Auth_page extends StatefulWidget {
 class _Auth_pageState extends State<Auth_page> {
   final AuthStore controller = Modular.get();
   ShowMToast toast = ShowMToast();
+  @override
+  void initState() {
+    controller.checkCurrentUser();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -129,28 +135,7 @@ class _Auth_pageState extends State<Auth_page> {
                   ),
                 ),
                 Container(
-                  height: 5,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: GestureDetector(
-                      child: Text(
-                        'Esqueci minha senha',
-                        style: GoogleFonts.rhodiumLibre(
-                            color: Color(0xFF0F3671),
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal),
-                      ),
-                      onTap: () {
-
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 50,
+                  height: 20,
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(35),
@@ -170,31 +155,42 @@ class _Auth_pageState extends State<Auth_page> {
                               Color(0xFF0F3671)),
                         ),
                         child: Text(
-                          "Login",
-                          style: GoogleFonts.rhodiumLibre(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal),
-                        ),
+                            "Login",
+                            style: GoogleFonts.rhodiumLibre(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal),
+                          ),
                         onPressed: () async {
                           await controller.RealizarLogin();
-                          if(controller.resultLogin==true){
+                          if(controller.resultLogin == true){
                             Modular.to.navigate("/home/");
-                            toast.successToast(
-                                context,
-                                message: "Login efetuado",
-                                alignment: Alignment.topCenter);
+                            Fluttertoast.showToast(
+                                msg: "Logado com sucesso",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                                fontSize: 12.0
+                            );
                           }else{
-                            toast.errorToast(context,
-                                message: "Revise suas credenciais",
-                                alignment: Alignment.topCenter);
+                            Fluttertoast.showToast(
+                                msg: "Revise suas credênciais",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 12.0
+                            );
                           }
 
                         }),
                   ),
                 ),
                 Container(
-                  height: 5,
+                  height: 20,
                 ),
                 Align(
                   alignment: Alignment.center,

@@ -25,7 +25,7 @@ abstract class RegistrationStoreBase with Store {
   final telefoneController = TextEditingController();
   final senhaController = TextEditingController();
 
-  String foto = "https://firebasestorage.googleapis.com/v0/b/carteirinha-sistematica.appspot.com/o/profile_default.jpg?alt=media&token=24c8807c-2f39-4dec-846a-28fdbc8b0fb6";
+  String foto = "https://firebasestorage.googleapis.com/v0/b/carteirinha-sistematica.appspot.com/o/profile_default.jpg?alt=media&token=b5693614-40a5-492d-ad34-972163377ec8";
 
 
   @observable
@@ -54,6 +54,10 @@ abstract class RegistrationStoreBase with Store {
       usuario.telefone = telefoneController.text;
       usuario.password = senhaController.text;
       usuario.foto = photoController;
+      usuario.ativo = false;
+      usuario.admin = false;
+      usuario.data_validade = '';
+      usuario.tipo_socio  = '';
 
       resultCadastro = await dbCadastro.CadastraUsuario(usuario);
     if (resultCadastro != true) {

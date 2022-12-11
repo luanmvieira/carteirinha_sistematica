@@ -65,6 +65,14 @@ mixin _$AuthStore on AuthStoreBase, Store {
     return _$RealizarLoginAsyncAction.run(() => super.RealizarLogin());
   }
 
+  late final _$esqueciSenhaAsyncAction =
+      AsyncAction('AuthStoreBase.esqueciSenha', context: context);
+
+  @override
+  Future<dynamic> esqueciSenha(String email) {
+    return _$esqueciSenhaAsyncAction.run(() => super.esqueciSenha(email));
+  }
+
   late final _$AuthStoreBaseActionController =
       ActionController(name: 'AuthStoreBase', context: context);
 
@@ -74,6 +82,17 @@ mixin _$AuthStore on AuthStoreBase, Store {
         name: 'AuthStoreBase.validatePasswordField');
     try {
       return super.validatePasswordField(password);
+    } finally {
+      _$AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic checkCurrentUser() {
+    final _$actionInfo = _$AuthStoreBaseActionController.startAction(
+        name: 'AuthStoreBase.checkCurrentUser');
+    try {
+      return super.checkCurrentUser();
     } finally {
       _$AuthStoreBaseActionController.endAction(_$actionInfo);
     }

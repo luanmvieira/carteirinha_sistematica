@@ -2,6 +2,7 @@ import 'package:carteirinha_sistematica/app/models/user_model.dart';
 import 'package:carteirinha_sistematica/app/modules/auth/repositories/db_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -33,6 +34,10 @@ abstract class AuthStoreBase with Store {
     progressLogin = false;
     }
 
+  @action
+  Future esqueciSenha(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 
   @action
   bool validatePasswordField(String password) {
@@ -40,5 +45,21 @@ abstract class AuthStoreBase with Store {
       return true;
 
     return false;
+  }
+  @action
+  checkCurrentUser() {
+    print("Entrou na funcao de checkCurrentUser()");
+    FirebaseAuth.instance.authStateChanges().listen((User? user){
+      print("Entrou na funcao auth");
+      if (user != null) {
+        print("Entrou na nula");
+        Modular.to.navigate("/home/");
+
+      } else {
+        print("Entrou na funcao login");
+        Modular.to.navigate("/");
+      }
+    });
+
   }
 }

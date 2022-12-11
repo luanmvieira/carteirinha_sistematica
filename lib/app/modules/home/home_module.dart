@@ -1,4 +1,5 @@
 import 'package:carteirinha_sistematica/app/modules/home/views/carteirinha_page.dart';
+import 'package:carteirinha_sistematica/app/modules/home/views/gestor_page.dart';
 import 'package:carteirinha_sistematica/app/modules/home/views/planos_page.dart';
 import 'package:carteirinha_sistematica/app/modules/home/views/profile_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,5 +19,6 @@ class HomeModule extends Module {
    ChildRoute('/carteirinha',child: (_, args) => CarteirinhaPage(),),
    ChildRoute('/profile',child: (_, args) => ProfilePage(),),
    ChildRoute('/planos',child: (_, args) => PlanosPage(),),
+   ChildRoute('/gestor',child: (_, args) => GestorPage(),),
  ];
 }

@@ -31,6 +31,7 @@ class ConexaoFirebaseLogin {
       return true;
     } catch (error) {
       print("Logar usuario: erro " + error.toString());
+      return false;
     }
   }
 
