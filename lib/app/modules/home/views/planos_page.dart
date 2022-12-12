@@ -95,7 +95,7 @@ class _PlanosPageState extends State<PlanosPage> {
                           height: 10,
                         ),
                         Text(
-                          "Para sua segurança, dados como matricula, e-mail e telefone só poderão ser alterados enviando um e-mail para contatosistemaricos@gmail.com .",
+                          "Desconto em produtos e eventos da Atlética Sistemática, Descontos em estabelecimentos parceiro, Sorteios e produtos exclusivos para sócios.",
                           textAlign: TextAlign.justify,
                         ),
                         SizedBox(
@@ -148,13 +148,25 @@ class _PlanosPageState extends State<PlanosPage> {
                         CarouselSlider(
                           items: [
                             Image.asset(
-                              'lib/app/assets/Socio1.jpg',
+                              'lib/app/assets/Atleta1.jpg',
                             ),
                             Image.asset(
-                              'lib/app/assets/Socio2.jpg',
+                              'lib/app/assets/Atleta2.jpg',
                             ),
                             Image.asset(
-                              'lib/app/assets/Socio3.jpg',
+                              'lib/app/assets/Atleta3.jpg',
+                            ),
+                            Image.asset(
+                              'lib/app/assets/Atleta4.jpg',
+                            ),
+                            Image.asset(
+                              'lib/app/assets/Atleta5.jpg',
+                            ),
+                            Image.asset(
+                              'lib/app/assets/Atleta6.jpg',
+                            ),
+                            Image.asset(
+                              'lib/app/assets/Atleta7.jpg',
                             ),
                           ],
                           options: CarouselOptions(
@@ -168,14 +180,14 @@ class _PlanosPageState extends State<PlanosPage> {
                             viewportFraction: 0.9,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Para sua segurança, dados como matricula, e-mail e telefone só poderão ser alterados enviando um e-mail para contatosistemaricos@gmail.com .",
+                        const Text(
+                          "Desconto em produtos e eventos da Atlética Sistemática, Descontos em estabelecimentos parceiros, Sorteios e produtos exclusivos para sócios, Treinos semanais .",
                           textAlign: TextAlign.justify,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(
@@ -206,7 +218,7 @@ class _PlanosPageState extends State<PlanosPage> {
                                 );
                               }),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Center(
@@ -219,7 +231,7 @@ class _PlanosPageState extends State<PlanosPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         CarouselSlider(
@@ -242,14 +254,14 @@ class _PlanosPageState extends State<PlanosPage> {
                             viewportFraction: 0.9,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Para sua segurança, dados como matricula, e-mail e telefone só poderão ser alterados enviando um e-mail para contatosistemaricos@gmail.com .",
+                        const Text(
+                          "Desconto em produtos e eventos da Atlética Sistemática, Descontos em estabelecimentos parceiros, Sorteios e produtos exclusivos para sócios, Treinos semanais",
                           textAlign: TextAlign.justify,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Container(

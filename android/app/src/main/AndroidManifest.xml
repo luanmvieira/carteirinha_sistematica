@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.carteirinha_sistematica">
    <application
-        android:label="carteirinha_sistematica"
+        android:label="Carteirinha Sistemática"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_laucher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

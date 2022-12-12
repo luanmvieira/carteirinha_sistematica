@@ -1,8 +1,12 @@
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:carteirinha_sistematica/app/models/user_model.dart';
 import 'package:carteirinha_sistematica/app/modules/home/home_store.dart';
+import 'package:carteirinha_sistematica/app/widgets/registration_default_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShowDialogUsuario extends StatefulWidget {
@@ -10,12 +14,13 @@ class ShowDialogUsuario extends StatefulWidget {
   final String matricula;
   final String data_nascimento;
   final String telefone;
-  final String tipo_socio;
+  final int tipo_socio;
   final String foto;
   final bool ativo;
   final bool admin;
   final String data_validade;
   final HomeStore controller;
+  final UserModel user;
 
   @override
   _ShowDialogUsuarioState createState() => _ShowDialogUsuarioState();
@@ -32,6 +37,7 @@ class ShowDialogUsuario extends StatefulWidget {
     required this.data_validade,
     required this.controller,
     required this.foto,
+    required this.user,
   }) : super(key: key);
 }
 
@@ -40,13 +46,14 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
 
   @override
   void initState() {
+    widget.controller.setUser(widget.user);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => widget.controller.getValidatorUser
+      builder: (_) => widget.controller.getValidatorSet
           ? SpinKitFadingCircle(
               color: Colors.white,
               size: 40,
@@ -63,7 +70,7 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                 content: Column(
                   children: <Widget>[
                     Container(
-                      height: 60,
+                      height: 45,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Color(0xff161621),
@@ -74,20 +81,17 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                       ),
                       child: Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Icon(
-                                Icons.account_box,
-                                color: Colors.white,
-                              ),
+                              SizedBox(width:49),
                               Text(
                                 widget.nome,
                                 style: GoogleFonts.openSans(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   color: Colors.white,
                                 ),
                               ),
@@ -121,12 +125,11 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                                   children: [
                                     Stack(
                                       children: [
-                                        Observer(
-                                          builder: (_) => CircleAvatar(
+                                      CircleAvatar(
                                               backgroundColor:
                                                   Color(0xff161621),
                                               radius: 60,
-                                              backgroundImage: NetworkImage(widget.foto)),
+                                              backgroundImage: NetworkImage(widget.foto),
                                         ),
                                       ],
                                     ),
@@ -153,55 +156,155 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                                     child: SingleChildScrollView(
                                       child: Column(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 45),
-                                            child: Text(
-                                              "Nome",
-                                              textAlign: TextAlign.left,
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                //color: Color.fromRGBO(33, 150, 243,1),
-                                              ),
-                                            ),
+                                          SizedBox(
+                                            height: 10,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 35),
-                                            child: Text(
-                                              "Email",
-                                              textAlign: TextAlign.left,
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                              ),
+                                          RegistrationDefaultTextField(
+                                              hintText: "Nome Completo",
+                                              textInputType: TextInputType.text,
+                                              controller: widget.controller.updateNameHomeController,
+                                              validation: (String value) {
+                                                if (widget.controller.validateNameField(value) ==
+                                                    false) {
+                                                  return 'Insira o seu Nome e Sobrenome';
+                                                }
+                                              }),
+                                          SizedBox(height: 10),
+                                          RegistrationDefaultTextField(
+                                              hintText: "Data de nascimento",
+                                              textInputType: TextInputType.number,
+                                              controller: widget.controller.updateDataHomeController,
+                                              textInputFormatter: [
+                                                FilteringTextInputFormatter.digitsOnly,
+                                                DataInputFormatter()],
+                                              validation: (String value) {
+                                                if (widget.controller.validateDataField(value) ==
+                                                    false) {
+                                                  return 'Insira a data completa';
+                                                }
+                                              }),
+                                          SizedBox(height: 10),
+                                          RegistrationDefaultTextField(
+                                              hintText: "Telefone",
+                                              textInputType: TextInputType.number,
+                                              controller: widget.controller.updateTelefoneHomeController,
+                                              textInputFormatter: [
+                                                FilteringTextInputFormatter.digitsOnly,
+                                                TelefoneInputFormatter()],
+                                              validation: (String value) {
+                                                if (widget.controller.validateTelefoneField(value) ==
+                                                    false) {
+                                                  return 'Insira Telefone completo';
+                                                }
+                                              }),
+                                          SizedBox(height: 10,),
+                                          DropdownButtonFormField<String>(
+                                            items: widget.controller.listAdmin.map((String value) {
+                                              return new DropdownMenuItem(
+                                                value: value,
+                                                child: Text(
+                                                  value,
+                                                  style: GoogleFonts
+                                                      .montserrat(
+                                                      color:
+                                                      Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              );
+                                            }).toList(),
+                                            hint: Text(
+                                              widget.controller.transformarPermissaoSAdmin(widget.controller
+                                                  .updateAdminHomeController),
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
                                             ),
+                                            dropdownColor: Color(0xFF0F3671),
+                                            onChanged: (value) {
+                                              widget.controller.updateAdminHomeController =
+                                                  widget.controller.transformarPermissaoAdmin(value!);
+                                            },
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 35),
-                                            child: Text(
-                                              "Telefone",
-                                              textAlign: TextAlign.left,
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                              ),
+                                          SizedBox(height: 10),
+                                          DropdownButtonFormField<String>(
+                                            items: widget.controller.listAtivo.map((String value) {
+                                              return new DropdownMenuItem(
+                                                value: value,
+                                                child: Text(
+                                                  value,
+                                                  style: GoogleFonts
+                                                      .montserrat(
+                                                      color:
+                                                      Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              );
+                                            }).toList(),
+                                            hint: Text(
+                                              widget.controller.transformarPermissaoSAtivo(widget.controller
+                                                  .updateAtivoHomeController),
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
                                             ),
+                                            dropdownColor: Color(0xFF0F3671),
+                                            onChanged: (value) {
+                                              widget.controller.updateAtivoHomeController =
+                                                  widget.controller.transformarPermissaoAtivo(value!);
+                                            },
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 35),
-                                            child: Text(
-                                              "Cargo:",
-                                              textAlign: TextAlign.left,
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                              ),
+                                          SizedBox(height: 10,),
+                                          widget.controller.updateAtivoHomeController?
+                                          DropdownButtonFormField<String>(
+                                            validator: (value) {
+                                              if (widget.controller.updateTipoSocioHomeController ==
+                                                  0) {
+                                                return "Selecione Tipo de Sócio";
+                                              }
+                                              return null;
+                                            },
+                                            items: widget.controller.listSocio.map((String value) {
+                                              return new DropdownMenuItem(
+                                                value: value,
+                                                child: Text(
+                                                  value,
+                                                  style: GoogleFonts
+                                                      .montserrat(
+                                                      color:
+                                                      Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              );
+                                            }).toList(),
+                                            hint: Text(
+                                              widget.controller.transformarPermissaoS(widget.controller
+                                                  .updateTipoSocioHomeController),
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontSize: 18),
                                             ),
-                                          ),
+                                            dropdownColor: Color(0xFF0F3671),
+                                            onChanged: (value) {
+                                              widget.controller.updateTipoSocioHomeController =
+                                                  widget.controller.transformarPermissao(value!);
+                                            },
+                                          ):Container(),
+                                          SizedBox(height: 10,),
+                                          widget.controller.updateAtivoHomeController?
+                                          RegistrationDefaultTextField(
+                                              hintText: "Data de Validade",
+                                              textInputType: TextInputType.number,
+                                              controller: widget.controller.updateDataVencimentoHomeController,
+                                              textInputFormatter: [
+                                                FilteringTextInputFormatter.digitsOnly,
+                                                DataInputFormatter()],
+                                              validation: (String value) {
+                                                if (widget.controller.validateDataField(value) ==
+                                                    false) {
+                                                  return 'Insira a data completa';
+                                                }
+                                              }):Container(),
+                                          SizedBox(height: 10),
                                         ],
                                       ),
                                     ),
@@ -214,7 +317,7 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                       ),
                     ),
                     Container(
-                      height: 70,
+                      height: 40,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Color(0xff161621),
@@ -237,10 +340,33 @@ class _ShowDialogUsuarioState extends State<ShowDialogUsuario> {
                                   children: <Widget>[
                                     TextButton(
                                       onPressed: () async {
+                                        UserModel _usuario = UserModel(
+                                          nome: widget.controller.updateNameHomeController.text,
+                                          data: widget.controller.updateDataHomeController.text,
+                                          telefone: widget.controller.updateTelefoneHomeController.text,
+                                          admin: widget.controller.updateAdminHomeController,
+                                          ativo: widget.controller.updateAtivoHomeController,
+                                          tipo_socio: widget.controller.updateTipoSocioHomeController,
+                                          data_validade: widget.controller.updateDataVencimentoHomeController.text,
+                                        );
+                                        print(widget.matricula);
+                                        await widget.controller.updateUsuarios(_usuario, widget.matricula).whenComplete(
+                                              () => Fluttertoast.showToast(
+                                                msg: "Editado com Sucesso",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                timeInSecForIosWeb: 1,
+                                                backgroundColor: Colors.green,
+                                                textColor: Colors.white,
+                                                fontSize: 12.0
+                                            ),
+                                        );
+                                        await widget.controller.getUsuarios();
+                                        Navigator.of(context).pop();
 
                                       },
                                       child: Text(
-                                        "Aceitar",
+                                        "Salvar",
                                         style: TextStyle(
                                             color: Colors.green,
                                             fontSize: 18),

@@ -57,7 +57,7 @@ abstract class RegistrationStoreBase with Store {
       usuario.ativo = false;
       usuario.admin = false;
       usuario.data_validade = '';
-      usuario.tipo_socio  = '';
+      usuario.tipo_socio  = 0 ;
 
       resultCadastro = await dbCadastro.CadastraUsuario(usuario);
     if (resultCadastro != true) {
@@ -104,6 +104,7 @@ abstract class RegistrationStoreBase with Store {
       });
     }
   }
+
 
   bool validateEmailField(String email) {
     return EmailValidator.validate(email);

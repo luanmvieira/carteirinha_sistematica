@@ -30,7 +30,7 @@ class RegistrationDefaultTextField extends StatelessWidget {
     return TextFormField(
       style: GoogleFonts.nunito(
         color: Colors.grey[700],
-        fontSize: 17,
+        fontSize: 15,
       ),
       maxLength:maxlengh,
 

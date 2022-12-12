@@ -2,8 +2,6 @@ import 'package:carteirinha_sistematica/app/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
 class ConexaoFirebaseHome{
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -44,32 +42,17 @@ class ConexaoFirebaseHome{
     }
     return _userList;
   }
+  Future<void> firebaseUpdateFuncionario(UserModel user, String matricula) async {
+    await _db.collection('usuarios').doc(matricula).update({
+      "nome"         : user.nome,
+      "telefone"     : user.telefone,
+      "data"         : user.data,
+      "ativo"        : user.ativo,
+      "admin"        : user.admin,
+      "data_validade": user.data_validade,
+      "tipo_socio"   : user.tipo_socio,
+    });
+  }
 
-  // Future EditarUsuario(UserModel user) async {
-  //   try {
-  //     _db.collection("usuarios").doc(user.cpf).set(user.toMap());
-  //     print("Usuario Editado");
-  //     return true;
-  //   } catch (error) {
-  //     print("erro ao Editar user" + error.toString());
-  //   }
-  // }
-  //
-  // Future DeleteUserBd(String cpf) async {
-  //
-  //   try{
-  //     await _db.collection('usuarios').doc(cpf).delete();
-  //     User? user = auth.currentUser!;
-  //     await user.delete();
-  //     return true;
-  //   }catch (error) {
-  //     print("erro ao Deletar user" + error.toString());
-  //     return false;
-  //
-  //   }
-  //
-  //
-  //
-  // }
 
 }

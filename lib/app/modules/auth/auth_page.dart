@@ -64,7 +64,7 @@ class _Auth_pageState extends State<Auth_page> {
                   height: MediaQuery
                       .of(context)
                       .size
-                      .height * 0.35,
+                      .height * 0.40,
                   width: MediaQuery
                       .of(context)
                       .size

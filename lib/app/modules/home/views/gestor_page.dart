@@ -41,7 +41,7 @@ class _GestorPageState extends State<GestorPage> {
                 color: Color(0xFF0F3671),
                 size: 40,
               ))
-          : Scaffold(
+          :Scaffold(
               appBar: AppBar(
                 title: Row(
                   children: [
@@ -86,8 +86,8 @@ class _GestorPageState extends State<GestorPage> {
                                         data_validade: _usuario.data_validade.isEmpty?
                                         "Usuario Inátivo": _usuario.data_validade,
                                         matricula: _usuario.matricula,
-                                        tipo_socio: _usuario.tipo_socio.isEmpty?
-                                        "Usuario Inátivo":_usuario.tipo_socio,
+                                        tipo_socio: _usuario.tipo_socio == 0 ?
+                                        "Usuario Inátivo":_controller.transformarPermissaoS( _usuario.tipo_socio),
                                       ),
                                       onTap: (){
                                         showDialog(
@@ -104,6 +104,7 @@ class _GestorPageState extends State<GestorPage> {
                                                 admin: _usuario.admin,
                                                 data_nascimento: _usuario.data,
                                                 telefone: _usuario.telefone,
+                                                user: _usuario,
                                               );
                                             });
 

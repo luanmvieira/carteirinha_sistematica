@@ -12,7 +12,7 @@ class UserModel {
   bool ativo;
   bool admin;
   String data_validade;
-  String tipo_socio;
+  int tipo_socio;
 
 
 
@@ -27,7 +27,7 @@ class UserModel {
     this.ativo = false,
     this.admin = false,
     this.data_validade = '',
-    this.tipo_socio = '',
+    this.tipo_socio = 0,
 
 }
       );

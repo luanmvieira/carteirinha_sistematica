@@ -1,4 +1,3 @@
-import 'package:carteirinha_sistematica/app/widgets/custom_buttom_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -39,7 +38,7 @@ class _CarteirinhaPageState extends State<CarteirinhaPage> {
                 color: Color(0xFF0F3671),
                 size: 40,
               ))
-          :Scaffold(
+          :  Scaffold(
               appBar: AppBar(
                 title: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -65,7 +64,7 @@ class _CarteirinhaPageState extends State<CarteirinhaPage> {
                         padding: const EdgeInsets.all(8),
                         height: 220,
                         width: double.infinity,
-                        child: Column(
+                        child: _controller.ativoHomeController? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Spacer(),
@@ -101,7 +100,7 @@ class _CarteirinhaPageState extends State<CarteirinhaPage> {
                                           height: MediaQuery
                                               .of(context)
                                               .size
-                                              .height * 0.11,
+                                              .height * 0.13,
                                           width: MediaQuery
                                               .of(context)
                                               .size
@@ -139,28 +138,25 @@ class _CarteirinhaPageState extends State<CarteirinhaPage> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(height: 10,),
-                                        Row(
-                                          children: [
+                                        SizedBox(height: 10),
                                             Text(
-                                              "Validade :",
+                                              "Validade : ${_controller.dataValidadeHomeController}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(width: 50,),
+                                        SizedBox(height: 10),
                                             Text(
-                                              "Tipo de Sócio :",
+                                              "Tipo de Sócio : ${_controller.tipoSocioHomeControllerString}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                        SizedBox(height: 20),
                                       ],
                                     ),
                                   ],
@@ -168,7 +164,17 @@ class _CarteirinhaPageState extends State<CarteirinhaPage> {
                               ],
                             ),
                           ],
-                        ),
+                        ):Container(
+                          alignment: Alignment.center,
+                          child: Text("Adquira o seu Plano sócio para ter acesso à carteirinha",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 19,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        )
                       ),
                     ),
                   ),
